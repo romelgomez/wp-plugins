@@ -1,0 +1,184 @@
+=== PageSpeed Ninja ===
+
+== CHANGELOG ==
+
+0.9.19 Beta Release [15 January 2018]
+- Fixed rebasing of CSS in the "Load external files" mode
+- Fixed conflict of http and https caches
+- Added option to merge embedded scripts and styles in <head> section only
+- Added warning about conflict of advanced caching and WooCommerce
+
+0.9.18 Beta Release [03 January 2018]
+- Fixed blank screen issue
+- Fixed issue with incorrect URLs in optimized css files
+- Improved Google Fonts loading
+
+0.9.17 Beta Release [07 December 2017]
+- Fixed issue with Google Fonts loading
+
+0.9.16 Beta Release [06 December 2017]
+- Caching of PageSpeed Insights scores
+- Improved Google Fonts loading
+- Fixed javascript processing in "Optimize integrations" feature
+- Fixed lazy loading with some slider plugins
+- Fixed issues with above-the-fold css and async css loading
+
+0.9.15 Beta Release [15 November 2017]
+- Fixed issues with nonblocking CSS loader
+
+0.9.14 Beta Release [14 November 2017]
+- Fixed merging of JavaScript
+- Fixed merging of CSS
+- Fixed CSS parser
+- Fixed processing of @import in CSS optimizer
+- Fixed parsing of <menu> tag in HTML5 parser
+- Fixed nonblocking css and js in IE6-8
+- Fixed lazy image loading in IE8
+- Fixed conflict with few plugins that use lazy image loading
+- Fixed issue with hidden switches in backend settings page
+- Fixed conflict of the Masonry library and asynchronous css loading
+- Added Autogeneration of srcset attribute for lazy image loading
+- Added cache reset after post/page/attachment/theme changes
+- Disabled optimization of comment feeds
+
+0.9.13 Beta Release [10 October 2017]
+- Fixed backend interface
+- Enabled optimizations by default
+- Reset js/css cache after update
+
+0.9.12 Beta Release [10 October 2017]
+- Fixed processing of @import rules in css files
+- Fixed error in config reading
+- Fixed Fatal error in libxml HTML parser
+- Fixed Fatal error in loadATFCSS()
+
+0.9.11 Beta Release [09 October 2017]
+- Fixed error message during uninstallation
+- Fixed warning message in the case of disabled js and css minification
+- Added lazy loading of iframes
+- Updated presets
+- Updated AMDD database
+- Changed configuration file format to allow plugin to be translated to other languages
+
+0.9.10 Beta Release [30 September 2017]
+- Fixed text domain slug
+- Fixed issue with quoted keyframe name in css parser
+- Fixed disabling of caching for logged-in users
+- Fixed disabling of non-blocking js mode
+- Improved estimation of required memory in image processing
+- Reduced memory usage by css optimizer
+- Switched remote connections to use download_url function
+
+0.9.9 Beta Release [27 September 2017]
+- Marked as tested with WordPress 4.8.2
+- Fixed undefined index in abovethefoldcss.php
+- Removed unused jQLight option
+
+0.9.8 Beta Release [27 September 2017]
+- Fixed render blocking issues
+- Fixed image lazy loading with Fast simple HTML parser
+- Fixed Google Fonts loading
+- Added check of memory limit in image optimization and rescaling
+- Added new lazy loading script (Lazy Load XT 2.0)
+- Minor backend changes
+
+0.9.7 Beta Release [06 September 2017]
+- Marked as tested with WordPress 4.8.1
+
+0.9.6 Beta Release [05 September 2017]
+- Switched to native updating
+
+0.9.5 Beta Release [27 August 2017]
+- Added optimization of srcset attribute in images
+- Added support of HTTP/2 Server Push
+- Fixed "Viewport width" feature
+- Fixed "DNS prefetch" feature in the "Fast simple" HTML parser mode
+- Fixed Google Font optimization
+
+0.9.4 Beta Release [23 July 2017]
+- Added request to allow using of external pagespeed.ninja critical CSS service and to send usage data
+- Removed update from versions prior to 0.8.23 (first public alpha release)
+- Moved "Optimize Emoji loading" option to "Minify JavaScript" section
+
+0.9.3 Beta Release [03 July 2017]
+- Fixed lazy image loading in the "stream" optimizer mode
+- Improved settings page for small/medium screen width
+- Colors of switches depend on diference between original and current scores
+- Updated AMDD database
+
+0.9.2 Beta Release [20 June 2017]
+- Added preview of results (without affecting website for other users)
+- Added "Optimize Emoji Loading" feature
+- Added "Google Fonts loading" feature
+- Added "Skip first images" and "Noscript position" features to fine tune lazy image loading
+- Added support of ImageMagick PHP extensions for image optimization
+- Fixed processing of non-standard JPEG and PNG images
+- Fixed CSS parser
+- Fixed issue with merging of subsequent javascripts before </body>
+- Fixed merging of Javascript and CSS in the "stream" optimizer mode
+- Fixed merging of Javascript and CSS with "onload" attribute
+- Fixed processing of <noscript> tags
+- Fixed dnsprefetch generation
+- Fixed timeout issue in the plugin activation
+- Added set width and height attributes for lazy loading images
+- Fixed loading of URLs starting with "//"
+- Fixed settings page in older browsers
+- Fixed several minor issues
+- Improved performance of local above-the-fold css generation
+- Google fonts are loaded synchronously by default
+- Excluded Google Analytics from "Non-blocking Javascript" feature
+- Default limits of inlined Javascript and CSS are set to 4096 bytes
+
+0.9.1 Beta Release [07 April 2017]
+- Added "Clear Cache" and "Clear Database Cache" button to the Troubleshooting section
+- Fixed Manage URLs feature in Troubleshooting section
+- Fixed automatical cache clearing
+
+0.9.0 Beta Release [04 April 2017]
+- New backend design
+- "Troubleshooting" section in Advanced settings
+- Fixed image lazy loading in "stream" html optimizer
+- Fixed in-browser generation of above-the-fold css
+- Fixed "Exclude files list" feature
+- Added notification about unsaved changes
+- Added notification about generated above-the-fold css
+- Minor performance improvements
+- Updated AMDD database
+
+0.8.27 Alpha Release [01 December 2016]
+- Added server-side page caching implementation
+- Fixed activation of image optimization and lazy loading settings
+- Minor performance improvements
+- Updated AMDD database
+
+0.8.26 Alpha Release [08 November 2016]
+- Significant code refactoring
+- Performance improvements
+- Added "Experimental" preset
+- Added loading animation for Google's Page Speed scores in backend
+- Fixed PHP warnings in plugin activation/deactivation
+- Fixed few Windows-related issues
+- Removed "Avoid app install interstitials that hide content" section (removed by Google's Page Speed service)
+- Moved image lazy loading settings to "Prioritize visible content" section
+
+0.8.25 Alpha Release [07 October 2016]
+- Fixed few PHP warnings and notices
+- Enabled logging for backend settings page and frontend pages only
+- Added compatibility with caching plugins
+- Added "Auto" option for "Load jQLight library" setting
+- Other minor changes
+
+0.8.24 Alpha Release [04 October 2016]
+- Added notice about compatibility with caching plugins
+- Uninstall of the plugin deletes generated low-quality image placeholders and gzipped svg images
+
+0.8.23 Alpha Release [21 September 2016]
+- Significant code refactoring
+- Added error logging to includes/error_log.php
+- Added "Low-quality image placeholders" setting
+- Added "Vertical lazy loading threshold" setting
+- Updated AMDD database
+- Other minor changes
+
+0.8.22 Alpha Release [14 July 2016]
+- First pre-public alpha release. Distributed privately.

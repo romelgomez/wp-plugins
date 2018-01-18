@@ -1,0 +1,1 @@
+!function(i){i(window).load(function(){var t=i(".site-header").outerHeight();i(window).width()>768&&i(".site").css("padding-top",t)})}(jQuery);

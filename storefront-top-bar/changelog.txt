@@ -1,0 +1,8 @@
+*** Storefront Top Bar Changelog ***
+
+1.0.1
+* fixed wrong info for Author and wrong url for support link.
+* removed docs link.
+
+1.0.0
+* Initial release

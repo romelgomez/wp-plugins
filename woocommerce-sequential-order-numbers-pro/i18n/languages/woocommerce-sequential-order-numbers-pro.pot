@@ -1,0 +1,143 @@
+# Copyright (C) 2017 SkyVerge
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Sequential Order Numbers Pro 1.11.3\n"
+"Report-Msgid-Bugs-To: https://woocommerce.com/my-account/tickets/\n"
+"POT-Creation-Date: 2014-06-15 22:41:29+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Sequential Order Numbers Pro"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:524
+msgid "Draft"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:646
+msgid "Order Number Start must be a number greater than or equal to 0."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:660
+#. translators: Placeholders: %1$s - highest order number, %2$s - current order
+#. number set
+msgid ""
+"There is an existing order (%1$s) with a number greater than or equal to "
+"%2$s. To set a new order number start please choose a higher number or "
+"permanently delete the relevant order(s)."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:684
+msgid "Order Numbers"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:687
+msgid "Order Number Start"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:690
+#. translators: Placeholders: %s - sample order number
+msgid ""
+"The starting number for the incrementing portion of the order numbers, "
+"unless there is an existing order with a higher number.  Use leading zeroes "
+"to pad your order numbers to a desired minimum length.  Any newly placed "
+"orders will be numbered like: %s"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:697
+#. translators: Placeholders: %s - order number
+msgid "Sample order number: %s"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:701
+msgid "Order Number Prefix"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:702
+msgid ""
+"Set your custom order number prefix.  You may use {DD}, {MM}, {YYYY} for "
+"the current day, month and year respectively."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:708
+#. translators: Placeholders: %1$s - opening <a> link tag, %2$s - closing </a>
+#. link tag
+msgid "See the %1$splugin documentation%2$s for the full set of available patterns."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:712
+msgid "Order Number Suffix"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:713
+msgid ""
+"Set your custom order number suffix. You may use {DD}, {MM}, {YYYY} for the "
+"current day, month and year respectively."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:721
+msgid "Skip Free Orders"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:722
+msgid "Skip order numbers for free orders"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:723
+msgid ""
+"With this enabled an order number will not be assigned to an order "
+"consisting solely of free products."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:731
+msgid "Free Order Identifer"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:733
+#. translators: Placeholders: %s - sample order number
+msgid "Example free order identifier: %s"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:734
+msgid ""
+"The text to display in place of the order number for free orders. This will "
+"be displayed anywhere an order number would otherwise be shown: to the "
+"customer, in emails, and in the admin."
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:739
+#: woocommerce-sequential-order-numbers.php:1188
+#. translators: FREE- as in free purchase order
+msgid "FREE-"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:1338
+#. translators: Placeholders: %1$s - Plugin Name, %2$s - Error message(s)
+msgid "Error activating and installing %1$s: %2$s"
+msgstr ""
+
+#: woocommerce-sequential-order-numbers.php:1341
+msgid "&laquo; Go Back"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.woocommerce.com/products/sequential-order-numbers-pro/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Provides custom incrementing order numbers for WooCommerce orders."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "SkyVerge"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.woocommerce.com"
+msgstr ""

@@ -1,0 +1,190 @@
+<?php
+
+
+/** Absolute path to the DAWS directory. - necessary for php protection */
+if ( !defined('ABSPATH') )
+	define('ABSPATH', dirname(__FILE__) . '/');
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+error_reporting(E_ALL);
+set_error_handler("terminate_missing_variables");
+
+
+require_once(dirname(__FILE__) . '/class.fileops.constants.php');
+require_once(dirname(__FILE__) . '/class.fileops.u.move.php');
+
+require_once(FileOpsConstants::$LIB_DIR . '/snaplib/snaplib.all.php');
+
+
+class FileOps
+{
+    private $lock_handle = null;
+
+    function __construct()
+    {
+        date_default_timezone_set('UTC'); // Some machines don’t have this set so just do it here.
+
+        SnapLibLogger::init(FileOpsConstants::$LOG_FILEPATH);
+    }
+
+    public function processRequest()
+    {
+        try {
+            SnapLibLogger::clearLog();
+            /* @var $state FileOpsState */
+			SnapLibLogger::log('process request');
+            $retVal = new StdClass();
+
+            $retVal->pass = false;
+
+
+           if (isset($_REQUEST['action'])) {
+                //$params = $_REQUEST;
+                $params = array();
+                SnapLibLogger::logObject('REQUEST', $_REQUEST);
+                
+                foreach($_REQUEST as $key => $value) 
+                {
+                    $params[$key] = json_decode($value, true);    
+                }
+
+            } else {
+                $json = file_get_contents('php://input');
+                SnapLibLogger::logObject('json1', $json);
+                $params = json_decode($json, true);
+                SnapLibLogger::logObject('json2', $json);
+           }
+
+            SnapLibLogger::logObject('params', $params);
+            SnapLibLogger::logObject('keys', array_keys($params));
+
+            $action = $params['action'];
+            
+            if ($action == 'deltree') {
+
+                $state = FileOpsState::getInstance($newRequest);
+
+                if($newRequest) {
+
+                    $state->workerTime = SnapLibUtil::GetArrayValue($params, 'worker_time');
+                    $state->directories = SnapLibUtil::getArrayValue($params, 'directories');
+                    $state->throttleDelayInUs = SnapLibUtil::getArrayValue($params, 'throttleDelay', false, 0) * 1000000;
+                    $state->excludedDirectories = SnapLibUtil::getArrayValue($params, 'excluded_directories', false, array());
+                    $state->excludedFiles = SnapLibUtil::getArrayValue($params, 'excluded_files', false, array());
+                }
+
+                SnapLibLogger::log('deltree');
+
+                $this->lock_handle = SnapLibIOU::fopen(FileOpsConstants::$PROCESS_LOCK_FILEPATH, 'c+');
+				SnapLibIOU::flock($this->lock_handle, LOCK_EX);
+
+				if($state->working) {
+
+                    SnapLibLogger::logObject('State In', $state);
+
+                    //rsr todo do work here
+					//DupArchiveEngine::expandArchive($expandState);
+
+				}
+
+                if (!$state->working) {
+
+                    $deltaTime = time() - $state->startTimestamp;
+                    SnapLibLogger::log("###### Processing ended.  Seconds taken:$deltaTime");
+
+                    if (count($state->failures) > 0) {
+                        SnapLibLogger::log('Errors detected');
+
+                        foreach ($state->failures as $failure) {
+                            SnapLibLogger::log("{$failure->subject}:{$failure->description}");
+                        }
+                    } else {
+                        SnapLibLogger::log('Expansion done, archive checks out!');
+                    }
+                }
+				else {
+					SnapLibLogger::log("Processing will continue");
+				}
+
+
+                SnapLibIOU::flock($this->lock_handle, LOCK_UN);
+
+                $retVal->pass = true;
+                $retVal->status = $this->getStatus($state);
+
+            } else if($action === 'move_files') {
+
+                $directories = SnapLibUtil::getArrayValue($params, 'directories', false, array());
+                $files =  SnapLibUtil::getArrayValue($params, 'files', false, array());
+                $excludedFiles =  SnapLibUtil::getArrayValue($params, 'excluded_files', false, array());
+                $destination = SnapLibUtil::getArrayValue($params, 'destination');                    
+
+                SnapLibLogger::log('before move');
+                $moveErrors = FileOpsMoveU::move($directories, $files, $excludedFiles, $destination);
+
+                SnapLibLogger::log('after move');
+
+                $retVal->pass = true;
+                $retVal->status = new stdClass();
+                $retVal->status->errors = $moveErrors;  // RSR TODO ensure putting right thing in here
+            }
+            else {
+
+                throw new Exception('Unknown command.');
+            }
+
+            session_write_close();
+
+        } catch (Exception $ex) {
+            $error_message = "Error Encountered:" . $ex->getMessage() . '<br/>' . $ex->getTraceAsString();
+
+            SnapLibLogger::log($error_message);
+
+            $retVal->pass = false;
+            $retVal->error = $error_message;
+        }
+
+		SnapLibLogger::logObject("before json encode retval", $retVal);
+
+		$jsonRetVal = json_encode($retVal);
+		SnapLibLogger::logObject("json encoded retval", $jsonRetVal);
+        echo $jsonRetVal;
+    }
+}
+
+function generateCallTrace()
+{
+    $e = new Exception();
+    $trace = explode("\n", $e->getTraceAsString());
+    // reverse array to make steps line up chronologically
+    $trace = array_reverse($trace);
+    array_shift($trace); // remove {main}
+    array_pop($trace); // remove call to this method
+    $length = count($trace);
+    $result = array();
+
+    for ($i = 0; $i < $length; $i++) {
+        $result[] = ($i + 1) . ')' . substr($trace[$i], strpos($trace[$i], ' ')); // replace '#someNum' with '$i)', set the right ordering
+    }
+
+    return "\t" . implode("\n\t", $result);
+}
+
+function terminate_missing_variables($errno, $errstr, $errfile, $errline)
+{
+//    echo "<br/>ERROR: $errstr $errfile $errline<br/>";
+    //  if (($errno == E_NOTICE) and ( strstr($errstr, "Undefined variable"))) die("$errstr in $errfile line $errline");
+
+
+    SnapLibLogger::log("ERROR $errno, $errstr, {$errfile}:{$errline}");
+    SnapLibLogger::log(generateCallTrace());
+    //  DaTesterLogging::clearLog();
+
+   // exit(1);
+    //return false; // Let the PHP error handler handle all the rest
+}
+
+$fileOps = new FileOps();
+
+$fileOps->processRequest();

@@ -1,0 +1,1 @@
+!function(n){n(function(){function a(){jQuery("#site-navigation").hasClass("toggled")?jQuery("#site-navigation").removeClass("toggled"):jQuery("#site-navigation").addClass("toggled")}n(".main-navigation .handheld-navigation, .main-navigation div.menu").prepend('<span id="close-menu" class="shm-close"> Cerrar </span>'),jQuery("#close-menu").click(function(){a()})})}(jQuery);
